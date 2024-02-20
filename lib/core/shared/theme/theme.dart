@@ -1,18 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static final lightTheme = ThemeData(
-    primaryColor: Colors.blue,
-    colorScheme: const ColorScheme.light(
-      background: Colors.white,
-    ),
-    textTheme: ThemeData.light().textTheme.apply(
-      fontFamily: 'Montserrat',
-      bodyColor: Colors.black,
-      displayColor: Colors.black,
-    ),
-  );
-
   static final darkTheme = ThemeData(
     primaryColor: const Color(0xFF1D2228),
     colorScheme: const ColorScheme.dark(
@@ -42,4 +30,9 @@ class TextStyles {
     fontSize: 20,
     fontWeight: FontWeight.bold,
   );
+}
+
+class IconTheme {
+  static const String add = 'assets/icons/add.png';
+  static const Color addColor = Colors.grey;
 }
