@@ -1,16 +1,43 @@
-# reminder
+# Reminder
 
-A new Flutter project.
+<!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
 
-## Getting Started
+> Created for Dti digital test. A new Flutter app to remind the tasks.
 
-This project is a starting point for a Flutter application.
+### What is already done?
 
-A few resources to get you started if this is your first Flutter project:
+The project is still in development. The next steps are going to be in those tasks:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [x] Screen design
+- [ ] Front-end remind screen
+- [ ] Front-end add remind
+- [ ] Conection with created api
+- [ ] Dinamic infos
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 💻 Wanna execute?
+
+Before starting, check if you atend on the following requirements: 
+<!---Estes são apenas requisitos de exemplo. Adicionar, duplicar ou remover conforme necessário--->
+* You've installed the updated version of `Flutter / Node / Android Studio`
+* You have a `Windows / Mac / Linux`.
+
+## 🚀 Installing Reminder
+
+To install Reminder, follow the steps:
+
+Windows:
+```
+Do a fork of the repository and download it
+Go on pubspeck.yaml and on terminal type "flutter pub get" to download the dependencies
+```
+
+## ☕ Using Reminder
+
+To use Reminder, follow the steps:
+
+```
+Create an avd by Android Studio or use your smartphone as an emulator
+Ctrl + f5 to execute
+```
+
+[⬆ Voltar ao topo](#nome-do-projeto)<br>
