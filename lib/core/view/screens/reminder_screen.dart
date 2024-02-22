@@ -1,31 +1,58 @@
 import 'package:flutter/material.dart';
 import '../widgets/header.dart';
-import '../widgets/carousel.dart';
 import '../widgets/reminder_list.dart';
 import '../../shared/theme/theme.dart';
 import './add_screen.dart';
+import 'package:get/get.dart';
+import '../../models/Reminder.dart';
+import '../../data/repository/repository.dart';
 
 class ReminderScreen extends StatelessWidget {
-  const ReminderScreen({Key? key});
+
+  // final reminders = Get.put<List<Reminder>>;
 
   @override
   Widget build(BuildContext context) {
+    var dateNow = DateTime.now();
+    List months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
+
+    List daysOfWeek = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday'
+    ];
+    // var repository = ReminderRepository();
+    // repository.fetchReminders();
+    
     return Scaffold(
       body: SafeArea(
         child: Stack(
           children: [
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Header(
-                  dia: "20",
-                  mes: "Fevereiro",
-                  ano: "2024",
-                  diaDaSemana: "Saturday",
-                ),
-                SizedBox(
-                  height: 180,
-                  child: Carousel(),
+                  dia: dateNow.day.toString(),
+                  mes: months[dateNow.month - 1],
+                  ano: dateNow.year.toString(),
+                  diaDaSemana: daysOfWeek[dateNow.weekday - 1],
                 ),
                 ReminderButtonsList(),
               ],
