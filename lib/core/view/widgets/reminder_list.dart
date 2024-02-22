@@ -5,6 +5,7 @@ import '../widgets/reminder_button.dart';
 import '../../shared/theme/theme.dart';
 import '../../controllers/remindersController.dart';
 import '../../data/repository/repository.dart';
+import 'package:intl/intl.dart';
 
 class ReminderButtonsList extends StatefulWidget {
   const ReminderButtonsList({super.key});
@@ -63,7 +64,7 @@ if(mounted){
                     padding: const EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 15),
                     child: ReminderButton(
                       name: reminders[index].name,
-                      date: reminders[index].date.toString(),
+                      date: DateFormat('dd-MM-yyyy').format(reminders[index].date),
                       ),
                   );
                 },

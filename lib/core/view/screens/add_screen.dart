@@ -28,6 +28,23 @@ void showAddReminderDialog(BuildContext context) {
       return;
     }
 
+    if(name.length > 36){
+      Get.dialog(
+        AlertDialog(
+          title: const Text('Nome do lembrete não pode ter mais de 36 caracteres'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Ok'),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+
     RegExp regExp =
         RegExp(r'^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(19|20)\d\d$');
     if (!regExp.hasMatch(date)) {
