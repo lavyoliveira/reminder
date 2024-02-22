@@ -1,14 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:reminder/core/data/repository/repository.dart';
+import 'package:reminder/core/models/Reminder.dart';
 import 'package:reminder/core/shared/theme/theme.dart';
 
 class ReminderButton extends StatelessWidget {
   final String name;
   final String date;
+  final Reminder reminder;
 
-  const ReminderButton({super.key, 
+  const ReminderButton({
+    super.key,
     required this.name,
     required this.date,
+    required this.reminder,
   });
+
+  void deleteReminder(Reminder reminder) {
+    var repository = ReminderRepository();
+
+    Get.dialog(
+      AlertDialog(
+        title: const Text('Deseja excluir este lembrete?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () {
+              repository.deleteReminder(reminder).then((value) => {
+                    Get.back(),
+                    Get.snackbar(
+                      'Lembrete excluído',
+                      'O lembrete foi excluído com sucesso',
+                      backgroundColor: AppTheme.darkTheme.primaryColor,
+                    ),
+                  });
+            },
+            child: const Text('Excluir'),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +85,7 @@ class ReminderButton extends StatelessWidget {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(50),
                   onTap: () {
-                    // Ação ao tocar na imagem
+                    deleteReminder(reminder);
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
