@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:reminder/core/shared/theme/theme.dart';
 
 class ReminderButton extends StatelessWidget {
-  final String label;
+  final String name;
+  final String date;
 
   const ReminderButton({super.key, 
-    required this.label,
+    required this.name,
+    required this.date,
   });
 
   @override
@@ -21,11 +23,22 @@ class ReminderButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Text(
-                label,
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 5),
+                  child: Text(
+                    name,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    date,
+                  ),
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.only(right: 20),

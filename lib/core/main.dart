@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Reminders',
       theme: AppTheme.darkTheme,
       home: ReminderScreen(),
-      onInit: () => Get.put(RemindersController()),
+      onInit: () => Get.put<RemindersController>(RemindersController()),
     );
   }
 }
