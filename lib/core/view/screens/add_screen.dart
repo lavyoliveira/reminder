@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:reminder/core/view/screens/reminder_screen.dart';
 import '../../shared/theme/theme.dart';
+import '../../data/repository/repository.dart';
 
 void showAddReminderDialog(BuildContext context) {
-  String title = '';
-  String description = '';
+  String name = '';
+  String date = '';
+
+  final repository = ReminderRepository();
 
   showDialog(
     context: context,
@@ -17,7 +21,7 @@ void showAddReminderDialog(BuildContext context) {
               height: 50,
               child: TextFormField(
                 onChanged: (value) {
-                  title = value;
+                  name = value;
                 },
                 decoration: InputDecoration(
                   labelText: 'Nome do lembrete',
@@ -35,7 +39,7 @@ void showAddReminderDialog(BuildContext context) {
               height: 50,
               child: TextFormField(
                 onChanged: (value) {
-                  description = value;
+                  date = value;
                 },
                 maxLines: 3,
                 decoration: InputDecoration(
@@ -57,8 +61,13 @@ void showAddReminderDialog(BuildContext context) {
             child: const Text('Cancelar'),
           ),
           ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
+            onPressed: () async {
+              try {
+                await repository.addReminder(name, date);
+                Navigator.of(context).pop();
+              } catch (e) {
+                print('Erro ao adicionar lembrete: $e');
+              }
             },
             child: const Text('Criar'),
           ),
