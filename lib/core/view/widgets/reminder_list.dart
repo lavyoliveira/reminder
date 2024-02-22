@@ -1,9 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:reminder/core/models/Reminder.dart';
 import '../widgets/reminder_button.dart';
 import '../../shared/theme/theme.dart';
+import '../../controllers/remindersController.dart';
+import '../../data/repository/repository.dart';
 
-class ReminderButtonsList extends StatelessWidget {
+class ReminderButtonsList extends StatefulWidget {
   const ReminderButtonsList({super.key});
+
+  @override
+  State<ReminderButtonsList> createState() => _ReminderButtonsList();
+  
+}
+
+class _ReminderButtonsList extends State<ReminderButtonsList> {
+  List<Reminder> reminders = [];
+  bool loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    var remindersController = Get.find<RemindersController>();
+    var remindersRepository = ReminderRepository();
+
+if(mounted){
+      remindersRepository.fetchReminders().then((value) {
+        setState(() {
+        reminders = value;
+        loading = false;
+    });
+    });
+  }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +56,15 @@ class ReminderButtonsList extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: 10,
+              child: loading ? const Center(child: CircularProgressIndicator()) : ListView.builder(
+                itemCount: reminders.length,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 15),
-                    child: ReminderButton(label: 'Button $index'),
+                    child: ReminderButton(
+                      name: reminders[index].name,
+                      date: reminders[index].date.toString(),
+                      ),
                   );
                 },
               ),
