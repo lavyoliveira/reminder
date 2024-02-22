@@ -65,6 +65,7 @@ if(mounted){
                     child: ReminderButton(
                       name: reminders[index].name,
                       date: DateFormat('dd-MM-yyyy').format(reminders[index].date),
+                      reminder: reminders[index],
                       ),
                   );
                 },

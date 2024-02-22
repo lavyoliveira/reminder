@@ -35,4 +35,11 @@ Future<Reminder> addReminder(String name, String date) async {
     throw Exception('Failed to add reminder');
   }
 }
+
+Future<void> deleteReminder(Reminder reminder) async {
+  final response = await http.delete(Uri.parse('$baseUrl/${reminder.id}'));
+  if (response.statusCode != 200) {
+    throw Exception('Failed to delete reminder');
+  }
+}
 }
