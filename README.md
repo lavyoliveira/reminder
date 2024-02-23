@@ -6,7 +6,7 @@
 
 ### What is already done?
 
-The project is still in development. The next steps are going to be in those tasks:
+Tasks made:
 
 - [x] Screen design
 - [x] Front-end remind screen
