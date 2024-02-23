@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:reminder/core/view/screens/reminder_screen.dart';
+
 import '../../shared/theme/theme.dart';
 import '../../data/repository/repository.dart';
+import '../widgets/reminder_list.dart';
 
-void showAddReminderDialog(BuildContext context) {
+void showAddReminderDialog(BuildContext context, GlobalKey<ReminderButtonsListState> key) {
   String name = '';
   String date = '';
 
@@ -89,6 +90,7 @@ void showAddReminderDialog(BuildContext context) {
     }
 
     repository.addReminder(name, dateSplitted).then((value) => {
+          key.currentState!.add(value),
           Navigator.of(context).pop(),
           Get.dialog(
             AlertDialog(

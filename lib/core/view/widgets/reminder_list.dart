@@ -1,38 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:reminder/core/models/Reminder.dart';
+import 'package:intl/intl.dart';
+
+import '../../models/Reminder.dart';
 import '../widgets/reminder_button.dart';
 import '../../shared/theme/theme.dart';
 import '../../controllers/remindersController.dart';
 import '../../data/repository/repository.dart';
-import 'package:intl/intl.dart';
 
 class ReminderButtonsList extends StatefulWidget {
-  const ReminderButtonsList({super.key});
+  const ReminderButtonsList({Key? key}) : super(key: key);
 
   @override
-  State<ReminderButtonsList> createState() => _ReminderButtonsList();
-  
+  State<ReminderButtonsList> createState() => ReminderButtonsListState();
 }
 
-class _ReminderButtonsList extends State<ReminderButtonsList> {
+class ReminderButtonsListState extends State<ReminderButtonsList> {
   List<Reminder> reminders = [];
   bool loading = true;
 
   @override
   void initState() {
     super.initState();
-    var remindersController = Get.find<RemindersController>();
     var remindersRepository = ReminderRepository();
 
-if(mounted){
+    if (mounted) {
       remindersRepository.fetchReminders().then((value) {
         setState(() {
-        reminders = value;
-        loading = false;
-    });
-    });
+          reminders = value;
+          loading = false;
+        });
+      });
+    }
   }
+
+  void add(Reminder reminder) {
+    var remindersController = Get.find<RemindersController>();
+    remindersController.add(reminder);
+    setState(() {
+      loading = true;
+      reminders = [...reminders, reminder];
+      reminders.sort((a, b) => a.date.compareTo(b.date));
+      loading = false;
+    });
+    Get.put<RemindersController>(remindersController);
+  }
+
+  void delete(Reminder reminder) {
+    var remindersController = Get.find<RemindersController>();
+    remindersController.delete(reminder);
+    setState(() {
+      loading = true;
+      reminders = reminders.where((element) => element != reminder).toList();
+      loading = false;
+    });
+    Get.put<RemindersController>(remindersController);
   }
 
   @override
@@ -53,23 +75,28 @@ if(mounted){
               padding: EdgeInsets.only(left: 16.0, top: 20.0, bottom: 10),
               child: Text(
                 'Lista de lembretes',
-                style: TextStyles.title, 
+                style: TextStyles.title,
               ),
             ),
             Expanded(
-              child: loading ? const Center(child: CircularProgressIndicator()) : ListView.builder(
-                itemCount: reminders.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 15),
-                    child: ReminderButton(
-                      name: reminders[index].name,
-                      date: DateFormat('dd-MM-yyyy').format(reminders[index].date),
-                      reminder: reminders[index],
-                      ),
-                  );
-                },
-              ),
+              child: loading
+                  ? const Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                      itemCount: reminders.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, top: 15, bottom: 15),
+                          child: ReminderButton(
+                            name: reminders[index].name,
+                            date: DateFormat('dd-MM-yyyy')
+                                .format(reminders[index].date),
+                            reminder: reminders[index],
+                            deleteReminderDinamic: delete,
+                          ),
+                        );
+                      },
+                    ),
             ),
           ],
         ),

@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
+
 import '../widgets/header.dart';
 import '../widgets/reminder_list.dart';
 import '../../shared/theme/theme.dart';
 import './add_screen.dart';
-import 'package:get/get.dart';
-import '../../models/Reminder.dart';
-import '../../data/repository/repository.dart';
 
 class ReminderScreen extends StatelessWidget {
+  GlobalKey<ReminderButtonsListState> reminderButtonsListKey = GlobalKey();
 
-  // final reminders = Get.put<List<Reminder>>;
 
   @override
   Widget build(BuildContext context) {
     var dateNow = DateTime.now();
+    
     List months = [
       'January',
       'February',
@@ -38,8 +37,6 @@ class ReminderScreen extends StatelessWidget {
       'Friday',
       'Saturday'
     ];
-    // var repository = ReminderRepository();
-    // repository.fetchReminders();
     
     return Scaffold(
       body: SafeArea(
@@ -54,7 +51,7 @@ class ReminderScreen extends StatelessWidget {
                   ano: dateNow.year.toString(),
                   diaDaSemana: daysOfWeek[dateNow.weekday - 1],
                 ),
-                ReminderButtonsList(),
+                ReminderButtonsList(key: reminderButtonsListKey),
               ],
             ),
             Positioned(
@@ -62,7 +59,7 @@ class ReminderScreen extends StatelessWidget {
               right: 20,
               child: FloatingActionButton(
                 onPressed: () {
-                  showAddReminderDialog(context);
+                  showAddReminderDialog(context, reminderButtonsListKey);
                 },
                 shape: const CircleBorder(),
                 backgroundColor: AppTheme.darkTheme.cardTheme.color,

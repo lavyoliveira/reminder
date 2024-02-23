@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:reminder/core/data/repository/repository.dart';
-import 'package:reminder/core/models/Reminder.dart';
-import 'package:reminder/core/shared/theme/theme.dart';
+
+import '../../data/repository/repository.dart';
+import '../../models/Reminder.dart';
+import '../../shared/theme/theme.dart';
 
 class ReminderButton extends StatelessWidget {
   final String name;
   final String date;
   final Reminder reminder;
+  Function deleteReminderDinamic;
 
-  const ReminderButton({
+  ReminderButton({
     super.key,
     required this.name,
     required this.date,
     required this.reminder,
+    required this.deleteReminderDinamic,
   });
 
   void deleteReminder(Reminder reminder) {
@@ -32,6 +35,7 @@ class ReminderButton extends StatelessWidget {
           TextButton(
             onPressed: () {
               repository.deleteReminder(reminder).then((value) => {
+                    deleteReminderDinamic(reminder),
                     Get.back(),
                     Get.snackbar(
                       'Lembrete excluído',
