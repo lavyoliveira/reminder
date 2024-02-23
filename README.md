@@ -50,4 +50,8 @@ Create an avd by Android Studio or use your smartphone as an emulator
 Ctrl + f5 to execute
 ```
 
+## ⚠️ IMPORTANT!
+
+To test this app was necessary an Android Emulator, so the localhost is not functional. Then, was created a Vercel (reminder-backend-eta.vercel.app) to upload and execute the API's. So, if you need to modify where you are calling the api in Flutter, it will be in lib> core> data> repository> repository.dart line 7
+
 [⬆ Voltar ao topo](#nome-do-projeto)<br>
