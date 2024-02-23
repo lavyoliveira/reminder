@@ -9,10 +9,10 @@
 The project is still in development. The next steps are going to be in those tasks:
 
 - [x] Screen design
-- [ ] Front-end remind screen
-- [ ] Front-end add remind
-- [ ] Conection with created api
-- [ ] Dinamic infos
+- [x] Front-end remind screen
+- [x] Front-end add remind
+- [x] Conection with created api
+- [x] Dinamic infos
 
 ## 💻 Wanna execute?
 
