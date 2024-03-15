@@ -2,7 +2,7 @@
 
 <!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
 
-> Created for Dti digital test. A new Flutter app to remind the tasks.
+> A new Flutter app to remind the tasks.
 
 ## 📱 Screenshots of the real app
 
